@@ -59,14 +59,34 @@
     border-radius: 5px;
   }
 
-  .button {
-    padding: ;
+  .button:active {
+    background-color: rgb(186, 217, 219);
   }
 
   #clear {
     background-color: rgb(178, 240, 240);
   }
 
+  #clear:active {
+    background-color: rgb(95, 206, 206);
+  }
+
   #delete {
     background-color: rgb(243, 190, 190);
+  }
+
+  #delete:active {
+    background-color: rgb(236, 134, 134);
+  }
+
+  .operand:active {
+    background-color: rgb(202, 230, 238);
+  }
+
+  .operator:focus {
+    background-color: rgb(202, 230, 238);
+  }
+
+  #equals:active {
+    background-color: rgb(186, 217, 219);
   }

@@ -1,3 +1,2 @@
-Calculator V1
-Saving current progress. 
-Features to ADD: Decimal point, Clear button and character display limit. 
+Calculator v2
+Added functionality: Clear Button, Delete Button, Decimal Point, display character limit, button press colour change. 

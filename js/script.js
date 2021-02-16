@@ -30,24 +30,31 @@ function operate(x, op, y) {
   }
 }
 
-function resultRounded(number) {
-  return number.substring(0, 10);
+function resultRounded(input) {
+  theString = input.substring(0, 10);
+  precise = Number(theString).toPrecision(7);
+  result = Number(precise)
+  return result
 }
 
+//resultRounded(String(result.toPrecision(7).replace(/\.([^0]+)0+$/, ".$1")))
+
 // selectors
-const display = document.querySelector('#display')
+const display = document.querySelector('#display');
 
-const addButton = document.querySelector('.add')
+const addButton = document.querySelector('.add');
 
-const equals = document.querySelector('#equals')
+const equals = document.querySelector('#equals');
 
-const operators = document.querySelectorAll('.operator')
+const operators = document.querySelectorAll('.operator');
 
-const numbtns = document.querySelectorAll('.operand')
+const numbtns = document.querySelectorAll('.operand');
 
-const clearScreen = document.querySelector('#clear')
+const clearScreen = document.querySelector('#clear');
 
-const deleteBtn = document.querySelector('#delete')
+const deleteBtn = document.querySelector('#delete');
+
+const decimal = document.querySelector('.point');
 
 
 let num1 = '';
@@ -61,7 +68,6 @@ let secondOperator = '';
 let result = '';
 
 display.textContent = '0'
-
 
 
 
@@ -82,6 +88,24 @@ numbtns.forEach((button) => {
   })
 })
 
+//Decimal point
+decimal.addEventListener('click', () => {
+  if (num1.includes('.')){
+    num1 = num1;
+  } else if (firstOperator == '' && num2 == ''){
+    num1 += '.';
+    display.textContent = resultRounded(num1);
+  }
+  if (num2.includes('.')) {
+    num2 = num2;
+  } else if (firstOperator != '') {
+    num2 += '.';
+    display.textContent = resultRounded(num2)
+  }
+})
+
+
+
 // Clicking operators
 operators.forEach((button) => {
   button.addEventListener('click', () => {
@@ -93,37 +117,41 @@ operators.forEach((button) => {
       // Shows result of two numbers if pressed before equals
     } else if (num1 != '' && num2 != '' && firstOperator != '') {
       secondOperator = op
-      result = operate(Number(num1), firstOperator, Number(num2));
-      display.textContent = resultRounded(String(result));
-      num1 = result;
+      result = operate(Number(num1), firstOperator, Number(num2)).toString();
+      display.textContent = resultRounded(result);
+      num1 = result.toString();
       num2 = '';
       firstOperator = secondOperator;
+    } else if (firstOperator != '' && secondOperator != '') {
+      firstOperator = firstOperator;
+      secondOperator = op;
     }
   })
 })
 
+// Clicking equals button
 equals.addEventListener('click', () => {
   if (num1 === '') {
-    display.textContent = num1;
+    display.textContent = display.textContent;
   } else if (num2 != '') {
-    result = operate(Number(num1), firstOperator, Number(num2));
-    display.textContent = resultRounded(String(result));
+    result = operate(Number(num1), firstOperator, Number(num2)).toString();
+    display.textContent = resultRounded(result);
   } else if (secondOperator != '') {
-    result = operate(Number(num1), secondOperator, Number(num2));
-    display.textContent = resultRounded(String(result));
+    result = operate(Number(num1), secondOperator, Number(num2)).toString();
+    display.textContent = resultRounded(result);
   }
 })
 
 
-//Clear button removes text on screen
+// Clear button removes text on screen
 clearScreen.addEventListener('click', () => {
   display.textContent = '0';
   num1 = '';
   num2 = '';
   firstOperator = '';
-})
+})display.textContent
 
-//Delete removes last input number
+// Delete removes last input number
 deleteBtn.addEventListener('click', () => {
   if (num1 != '' && num2 === '') {
     num1 = num1.slice(0, -1);
