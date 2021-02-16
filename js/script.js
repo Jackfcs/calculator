@@ -149,7 +149,7 @@ clearScreen.addEventListener('click', () => {
   num1 = '';
   num2 = '';
   firstOperator = '';
-})display.textContent
+})
 
 // Delete removes last input number
 deleteBtn.addEventListener('click', () => {
