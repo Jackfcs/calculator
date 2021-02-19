@@ -37,7 +37,6 @@ function resultRounded(input) {
   return result
 }
 
-//resultRounded(String(result.toPrecision(7).replace(/\.([^0]+)0+$/, ".$1")))
 
 // selectors
 const display = document.querySelector('#display');
@@ -57,6 +56,8 @@ const deleteBtn = document.querySelector('#delete');
 const decimal = document.querySelector('.point');
 
 
+
+
 let num1 = '';
 
 let num2 = '';
@@ -70,37 +71,56 @@ let result = '';
 display.textContent = '0'
 
 
+// Keybpard input for numbers
+window.addEventListener('keydown', (e) => {
+  if ((e.key >= 0 || e.key) < 10 && firstOperator == '') {
+    num1 += e.key
+    display.textContent = num1;    
+  } else if ((e.key >= 0 || e.key) && (num1 != '' && firstOperator != '')) {
+    num2 += e.key;
+    display.textContent = num2;
+  }
+});
 
-// Clicking on number buttons
+
+
+// Clicking on number button
 numbtns.forEach((button) => {
   button.addEventListener('click', () => {
     let num = button.textContent;
     //Assign to num1
     if (firstOperator == '') {
+      
       num1 += num;
-      display.textContent = resultRounded(num1);
+      display.textContent = num1;
       //Assign to num2
     } else if (num1 != '' && firstOperator != '') {
+      
       num2 += num;
-      display.textContent = resultRounded(num2);
+      display.textContent = num2;
+    } else if (num1 != '' && num2 != '' && result != '') {
+      num1 = ''
+      num2 = ''
     }
-
   })
+
 })
 
 //Decimal point
 decimal.addEventListener('click', () => {
-  if (num1.includes('.')){
+  if (num1.includes('.')) {
     num1 = num1;
-  } else if (firstOperator == '' && num2 == ''){
+  } else if (firstOperator == '' && num2 == '') {
     num1 += '.';
-    display.textContent = resultRounded(num1);
+    display.textContent = num1;
   }
   if (num2.includes('.')) {
     num2 = num2;
-  } else if (firstOperator != '') {
+  } else if (firstOperator != '' && display.textContent != result) {
     num2 += '.';
-    display.textContent = resultRounded(num2)
+    display.textContent = num2;
+  } else if (display.textConent = result) {
+    num2 = num2;
   }
 })
 
@@ -112,7 +132,7 @@ operators.forEach((button) => {
     let op = button.textContent;
 
     if (num1 != '' && num2 === '') {
-      display.textContent = resultRounded(num1);
+      display.textContent = num1;
       firstOperator = op;
       // Shows result of two numbers if pressed before equals
     } else if (num1 != '' && num2 != '' && firstOperator != '') {
@@ -149,6 +169,7 @@ clearScreen.addEventListener('click', () => {
   num1 = '';
   num2 = '';
   firstOperator = '';
+  result = '';
 })
 
 // Delete removes last input number
@@ -161,9 +182,5 @@ deleteBtn.addEventListener('click', () => {
     display.textContent = num2;
   }
 })
-
-
-
-
 
 
