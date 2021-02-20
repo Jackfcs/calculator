@@ -1,2 +1,2 @@
-Calculator v2
-Added functionality: Clear Button, Delete Button, Decimal Point, display character limit, button press colour change. 
+Calculator
+All functionality included. All buttons work. Display character limit. Keyboard input for numbers.
