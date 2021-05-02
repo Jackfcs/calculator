@@ -1,2 +1,2 @@
-Calculator
-All functionality included. All buttons work. Display character limit. Keyboard input for numbers.
+Calculator app using Javascript, HMTL and CSS
+Live demo here https://jackfcs.github.io/calculator/
